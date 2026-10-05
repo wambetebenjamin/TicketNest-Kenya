@@ -1,0 +1,555 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   TicketNest Kenya — design tokens reproduced from the design source
+   (theevent-1.0.0.zip / TheEvent by BootstrapMade, assets/css/main.css)
+   ========================================================================== */
+
+:root {
+  /* Global colors — from source */
+  --background-color: #ffffff;
+  --default-color: #2f3138;
+  --heading-color: #0e1b4d;
+  --accent-color: #f82249;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
+
+  /* Nav colors — from source */
+  --nav-color: rgba(255, 255, 255, 0.65);
+  --nav-hover-color: #ffffff;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #212529;
+  --nav-dropdown-hover-color: #f82249;
+  --nav-scrolled: rgba(1, 8, 33, 0.82);
+
+  /* Background presets — from source */
+  --light-background: #f2f2f3;
+  --dark-background: #000820;
+  --dark-surface: #001553;
+
+  /* Fonts — from source (Google Fonts: Roboto + Raleway, loaded in layout head) */
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Raleway", sans-serif;
+
+  /* Motion — spec timings */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --card-stagger: 65ms;
+
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+  body {
+    color: var(--default-color);
+    background-color: var(--background-color);
+    font-family: var(--default-font);
+    font-size: 15px; /* body 15px minimum — spec */
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    font-family: var(--heading-font);
+    font-weight: 700;
+  }
+  a {
+    transition: 0.3s;
+  }
+  ::selection {
+    background: var(--accent-color);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* ---------- Layout: source sections are 60px 0 ---------- */
+  .tn-section {
+    padding: 60px 0;
+  }
+  .tn-container {
+    @apply mx-auto w-full max-w-wrap px-4 sm:px-6 lg:px-8;
+  }
+
+  /* ---------- Section title — 32px/700 with 50x3px accent underline (source) ---------- */
+  .tn-section-title {
+    text-align: center;
+    padding-bottom: 60px;
+  }
+  .tn-section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: var(--heading-color);
+  }
+  .tn-section-title h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--accent-color);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .tn-section-title p {
+    margin-bottom: 0;
+  }
+
+  /* ---------- Buttons — pill radius from source; 12px per spec ---------- */
+  .tn-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--heading-font);
+    font-size: 12px; /* buttons 12px — spec */
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 50px;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    border: none;
+    line-height: 1;
+  }
+  .tn-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+  .tn-btn-primary {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+  }
+  .tn-btn-primary:hover:not(:disabled) {
+    background: #d91a3f;
+    color: var(--contrast-color);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -6px rgba(248, 34, 73, 0.5);
+  }
+  .tn-btn-dark {
+    background: var(--heading-color);
+    color: var(--contrast-color);
+  }
+  .tn-btn-dark:hover:not(:disabled) {
+    background: #0e1b4d;
+    opacity: 0.92;
+    color: var(--contrast-color);
+  }
+  .tn-btn-outline {
+    background: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+  }
+  .tn-btn-outline:hover:not(:disabled) {
+    background: var(--accent-color);
+    color: #fff;
+  }
+  .tn-btn-ghost-light {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+  }
+  .tn-btn-ghost-light:hover:not(:disabled) {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  .tn-btn-sm {
+    padding: 8px 18px;
+  }
+
+  /* ---------- Cards — source shadow 0 3px 20px -2px rgba(0,0,0,.1) ---------- */
+  .tn-card {
+    background: var(--surface-color);
+    box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* ---------- Forms ---------- */
+  .tn-input,
+  .tn-select {
+    width: 100%;
+    border: 1px solid #d9dce3;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: var(--default-color);
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: var(--default-font);
+  }
+  .tn-input:focus,
+  .tn-select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(248, 34, 73, 0.14);
+  }
+  .tn-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 6px;
+    font-family: var(--heading-font);
+  }
+  .tn-meta {
+    font-size: 11px; /* metadata 11px minimum — spec */
+    color: color-mix(in srgb, var(--default-color), transparent 35%);
+  }
+  .tn-nav-link {
+    font-size: 13px; /* navigation 13px — spec */
+    font-weight: 600;
+    font-family: var(--nav-font);
+  }
+
+  /* ---------- Utility text colors on dark sections ---------- */
+  .tn-dark-section {
+    background: var(--dark-background);
+    color: #fff;
+  }
+  .tn-dark-section h1, .tn-dark-section h2, .tn-dark-section h3,
+  .tn-dark-section h4, .tn-dark-section h5, .tn-dark-section h6 {
+    color: #fff;
+  }
+}
+
+/* ==========================================================================
+   LOADING SCREEN — logo mark appears from center, scan line sweeps across a
+   ticket shape left to right, progress counts to 100, content fades in.
+   Total duration under 2s. Shown once per browser session.
+   ========================================================================== */
+.tn-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: var(--dark-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.tn-loader--done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.tn-loader__logo {
+  animation: tn-logo-in 0.45s var(--ease-out-expo) both;
+}
+@keyframes tn-logo-in {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.tn-loader__ticket {
+  position: relative;
+  width: 168px;
+  height: 64px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: tn-logo-in 0.4s var(--ease-out-expo) 0.15s both;
+}
+.tn-loader__ticket::before,
+.tn-loader__ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--dark-background);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  transform: translateY(-50%);
+}
+.tn-loader__ticket::before { left: -9px; }
+.tn-loader__ticket::after { right: -9px; }
+.tn-loader__scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  background: linear-gradient(90deg, transparent, var(--accent-color));
+  box-shadow: 0 0 18px 2px rgba(248, 34, 73, 0.55);
+  animation: tn-scan 0.85s linear 0.25s 2 both;
+}
+@keyframes tn-scan {
+  0% { left: -44px; }
+  100% { left: 100%; }
+}
+.tn-loader__progress {
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.tn-loader__bar {
+  width: 168px;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+.tn-loader__bar-fill {
+  height: 100%;
+  background: var(--accent-color);
+  transition: width 0.12s linear;
+}
+
+/* ==========================================================================
+   HERO — headline enters word by word, 0.09s stagger, expo ease (spec)
+   ========================================================================== */
+.tn-hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(28px);
+  animation: tn-hero-word 0.6s var(--ease-out-expo) both;
+}
+@keyframes tn-hero-word {
+  0% { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   SCROLL REVEAL — event cards stagger fade up 65ms apart (spec), AOS-like
+   (source AOS: 600ms ease-in-out once)
+   ========================================================================== */
+.tn-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.tn-reveal--in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tn-reveal--immediate {
+  transition: none;
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   EVENT CARDS — hover: poster scales 1.04, shadow lifts, translateY -5px,
+   250ms ease (spec). Sold out cards desaturated with disabled button.
+   ========================================================================== */
+.tn-event-card {
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+.tn-event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px -12px rgba(14, 27, 77, 0.22);
+}
+.tn-event-card__poster {
+  transition: transform 250ms ease;
+}
+.tn-event-card:hover .tn-event-card__poster {
+  transform: scale(1.04);
+}
+.tn-event-card--soldout {
+  filter: saturate(0.25);
+}
+.tn-event-card--soldout:hover {
+  transform: none;
+  box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   CHECKOUT — steps slide: new step enters left, previous slides right out,
+   300ms ease-out (spec)
+   ========================================================================== */
+.tn-checkout-step {
+  animation: tn-step-in 300ms ease-out both;
+}
+@keyframes tn-step-in {
+  0% { opacity: 0; transform: translateX(56px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+.tn-checkout-step--back {
+  animation: tn-step-back 300ms ease-out both;
+}
+@keyframes tn-step-back {
+  0% { opacity: 0; transform: translateX(-56px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ==========================================================================
+   CONFIRMATION — QR reveal with scan line top to bottom 600ms; ticket visual
+   scales 0.8 -> 1 with rotation -3deg -> 0deg, 500ms ease-out (spec)
+   ========================================================================== */
+.tn-ticket-visual {
+  animation: tn-ticket-pop 500ms ease-out both;
+}
+@keyframes tn-ticket-pop {
+  0% { transform: scale(0.8) rotate(-3deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.tn-qr-wrap {
+  position: relative;
+  overflow: hidden;
+  animation: tn-qr-in 600ms ease-out both;
+}
+@keyframes tn-qr-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.tn-qr-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 3px;
+  background: var(--accent-color);
+  box-shadow: 0 0 14px 2px rgba(248, 34, 73, 0.6);
+  animation: tn-qr-sweep 600ms ease-out both;
+}
+@keyframes tn-qr-sweep {
+  0% { top: -4px; }
+  100% { top: 100%; }
+}
+
+/* ==========================================================================
+   MAP VIEW TOGGLE — grid fades out, map fades in, 200ms (spec)
+   ========================================================================== */
+.tn-fade-swap {
+  transition: opacity 200ms ease;
+}
+.tn-fade-swap--hidden {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   Pulsating WhatsApp float + tooltip
+   ========================================================================== */
+.tn-wa-float {
+  animation: tn-wa-pulse 3s ease-in-out infinite;
+}
+@keyframes tn-wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  50% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+/* Scrolled navbar state (source: bg rgba(1,8,33,.82) + shadow) */
+.tn-navbar--scrolled {
+  background: var(--nav-scrolled) !important;
+  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* ==========================================================================
+   MDX article typography (Raleway headings, Roboto body 15px+)
+   ========================================================================== */
+.prose-ticket h2 {
+  font-size: 24px;
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+}
+.prose-ticket h3 {
+  font-size: 19px;
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+.prose-ticket p {
+  margin-bottom: 1.1rem;
+  font-size: 15.5px;
+  line-height: 1.85;
+  color: color-mix(in srgb, var(--default-color), transparent 12%);
+}
+.prose-ticket ul,
+.prose-ticket ol {
+  margin: 0 0 1.2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.prose-ticket ul { list-style: disc; }
+.prose-ticket ol { list-style: decimal; }
+.prose-ticket li { font-size: 15px; line-height: 1.7; }
+.prose-ticket strong { color: var(--heading-color); }
+.prose-ticket blockquote {
+  border-left: 4px solid var(--accent-color);
+  background: var(--light-background);
+  padding: 14px 18px;
+  border-radius: 0 10px 10px 0;
+  margin: 0 0 1.2rem;
+  font-style: italic;
+}
+.prose-ticket blockquote p { margin: 0; }
+.prose-ticket hr {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+.prose-ticket code {
+  background: var(--light-background);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 13.5px;
+}
+
+/* Horizontal scroll shadows for mobile tabs / tier tables */
+.tn-hscroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.tn-hscroll::-webkit-scrollbar {
+  height: 6px;
+}
+.tn-hscroll::-webkit-scrollbar-thumb {
+  background: rgba(47, 49, 56, 0.25);
+  border-radius: 99px;
+}
+
+/* ==========================================================================
+   PREFERS-REDUCED-MOTION — instant fades, no stagger, QR line removed,
+   chart fills instantly (spec)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tn-loader__scan { animation: none; }
+  .tn-hero-word {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .tn-reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .tn-event-card,
+  .tn-event-card__poster {
+    transition: none;
+  }
+  .tn-event-card:hover { transform: none; }
+  .tn-checkout-step,
+  .tn-checkout-step--back { animation: none; }
+  .tn-ticket-visual { animation: none; }
+  .tn-qr-scanline { display: none; }
+  .tn-qr-wrap { animation: none; opacity: 1; }
+  .tn-wa-float { animation: none; }
+  .tn-logo-in { animation: none; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
